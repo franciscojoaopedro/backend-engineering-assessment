@@ -1,4 +1,5 @@
 # DevTest Engineering Assessment
+- **Teste BackEnd na DevTest**
 
 Este projeto é um sistema back-end para uma aplicação de quadro de empregos, replicando o conceito e as funcionalidades da **Plus Network**. O sistema fornece funcionalidades para registro de usuários, candidatura a vagas, filtros avançados de pesquisa e notificações por e-mail, tudo dentro de uma API REST.
 
@@ -10,7 +11,7 @@ Este projeto é um sistema back-end para uma aplicação de quadro de empregos, 
 - **PostgreSQL**: Banco de dados para armazenamento.
 - **Nodemailer**: Para envio de notificações por e-mail.
 - **jsonwebtoken**: Para gerenciamento de autenticação de usuários.
-- **bcryptjs**: Para hashing de senhas.
+- **bcrypt**: Para hashing de senhas.
 
 ## Funcionalidades
 
@@ -37,13 +38,13 @@ Este projeto é um sistema back-end para uma aplicação de quadro de empregos, 
    - Filas para processamento de tarefas em segundo plano (ex.: notificações por e-mail).
 
 7. **Documentação da API**
-   - Documentação da API REST utilizando Swagger.
+   - Documentação da API REST utilizando ApiDog.
+   - Link da documentacao da api: https://www.apidog.com/apidoc/project-731167
 
 ## Iniciando o Projeto
 
 ### Pré-requisitos
 
-- Docker instalado para conteinerização.
 - Node.js e npm instalados localmente.
 
 ### Instalação
@@ -51,6 +52,15 @@ Este projeto é um sistema back-end para uma aplicação de quadro de empregos, 
 1. Clone o repositório:
 
    ```bash
-   git clone <url-do-repositorio>
-   cd <diretorio-do-projeto>
-
+   git clone https://github.com/franciscojoaopedro/backend-engineering-assessment.git
+   cd backend-engineering-assessment
+   ```
+2. Instalar as dependecias
+   ``` bash
+   npm install
+   npx prisma generate dev
+   ```
+3. Executar o projecto
+   ```bash
+   npm run dev
+   ```
