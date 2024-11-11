@@ -1,11 +1,12 @@
-
+import {CreateUserDto} from "../../../types/entities/user.types";
+import useUser from "../../../shared/helpers/useUser";
 
 
 class Create_user_service{
+    async  execute(data:CreateUserDto){
+        const {createUser}=useUser()
+            return  await createUser.execute(data);
 
-    async  execute(data:any){
-
-        console.log(data);
     }
 }
 
