@@ -46,17 +46,59 @@ class User_repository_prisma implements  UserGateway{
        }
     }
 
-    getAllUsers(): Promise<void> {
-        return Promise.resolve(undefined);
-    }
 
-    getUserByEmail(id: string): Promise<void> {
-        return Promise.resolve(undefined);
-    }
 
-    getUserById(id: string): Promise<void> {
-        return Promise.resolve(undefined);
+async getAllUsers(): Promise<UserDto[] |[]> {
+        const data=await this.prisma.user.findMany()
+    return data.map(user => {
+        const data: UserDto = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            age: user.age,
+            country: user.country,
+            phone: user.phone,
+            gender: user.gender,
+        }
+
+        return data
+    })
+}
+async  getUserById(id: string): Promise<UserDto | null> {
+        const user=  await this.prisma.user.findUnique({
+            where:{id:id}
+        })
+    if(user){
+        return  {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        age: user.age,
+        country: user.country,
+        phone: user.phone,
+        gender: user.gender,
+        }
     }
+    return null
+
+}
+async getUserByEmail(email:string): Promise<UserDto| null> {
+    const user=  await this.prisma.user.findUnique({
+        where:{email:email}
+    })
+    if(user){
+        return  {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            age: user.age,
+            country: user.country,
+            phone: user.phone,
+            gender: user.gender,
+        }
+    }
+    return null
+}
 
 
 }

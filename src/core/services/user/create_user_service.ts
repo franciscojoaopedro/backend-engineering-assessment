@@ -4,8 +4,8 @@ import useUser from "../../../shared/helpers/useUser";
 
 class Create_user_service{
     async  execute(data:CreateUserDto){
-        const {createUser}=useUser()
-            return  await createUser.execute(data);
+        const {createUserUseCase}=useUser()
+            return  await createUserUseCase.execute(data);
 
     }
 }

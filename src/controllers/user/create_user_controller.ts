@@ -3,6 +3,7 @@ import create_user_service from "../../core/services/user/create_user_service";
 import {CreateUserDto} from "../../types/entities/user.types";
 import Bcrypt from "../../shared/utils/useBycriptJs";
 import usePrisma from "../../shared/helpers/usePrisma";
+import {ErrorResponse} from "../../shared/utils/errorResponseController";
 
 class Create_user_controller {
     async execute(request:FastifyRequest,reply:FastifyReply):Promise<FastifyReply> {
@@ -44,13 +45,7 @@ class Create_user_controller {
             });
         }
         catch (err){
-            const error= err instanceof  Error
-            return reply.code(500).send({
-                success:false,
-                error:error?err.name:"Internal Server Error",
-                message:error?err.message:"Internal Server Error",
-
-            })
+             return  ErrorResponse(err,reply)
         }
 
     }

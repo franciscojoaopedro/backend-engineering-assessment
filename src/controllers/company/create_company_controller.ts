@@ -5,7 +5,7 @@ import Bcrypt from "../../shared/utils/useBycriptJs";
 import usePrisma from "../../shared/helpers/usePrisma";
 import {ErrorResponse} from "../../shared/utils/errorResponseController";
 
-class Create_user_controller {
+class Create_company_controller {
     async execute(request:FastifyRequest,reply:FastifyReply):Promise<FastifyReply> {
         const {
             gender,
@@ -51,5 +51,5 @@ class Create_user_controller {
     }
 }
 
-const create_user_controller=new Create_user_controller();
+const create_user_controller=new Create_company_controller();
 export default (create_user_controller);

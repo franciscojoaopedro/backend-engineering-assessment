@@ -22,5 +22,5 @@ export class GetAllUserController {
 }
 
 
-const get_all_users_controller=new GetAllUserController();
-export default (get_all_users_controller);
+const get_all_company_controller=new GetAllUserController();
+export default (get_all_company_controller);

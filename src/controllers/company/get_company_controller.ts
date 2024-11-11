@@ -34,5 +34,5 @@ export class GetUserController {
 }
 
 
-const get_user_controller=new GetUserController();
-export default (get_user_controller);
+const get_company_controller=new GetUserController();
+export default (get_company_controller);
