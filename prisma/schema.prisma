@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Company {
@@ -74,11 +75,20 @@ model Application {
   updatedAt DateTime         @updatedAt
 }
 
+enum Gender {
+  female
+  male
+}
+
 model User {
   id           String        @id @default(uuid())
   name         String
   email        String        @unique
   password     String
+  age          Int
+  country      String
+  phone        String
+  gender       Gender
   applications Application[]
   jobFavorites JobFavorite[]
   createdAt    DateTime      @default(now())
