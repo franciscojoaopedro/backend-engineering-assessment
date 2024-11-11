@@ -4,7 +4,8 @@ import  dotenv from "dotenv"
 dotenv.config()
 
 const JWT_SECRET = process.env.JWT_SECRET
-const JWT_SECRET_RESET_PASSWORD="ujshuhsuhs9uh9h9h982y98299ty892hyiueyh982ye98y8ughui2"
+const JWT_SECRET_RESET_PASSWORD=process.env.JWT_SECRET_RESET_PASSWORD!
+
 export default function useJwt() {
     async function generateTokenUserLogin(data: any): Promise<string> {
         return jwt.sign(data, JWT_SECRET!)

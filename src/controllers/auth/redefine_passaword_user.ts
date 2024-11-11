@@ -3,7 +3,9 @@ import Bcrypt from "../../shared/utils/useBycriptJs";
 import jwt from "jsonwebtoken";
 import prisma from "../../infrastructure/db/prisma"
 
-const JWT_SECRET_RESET_PASSWORD="ujshuhsuhs9uh9h9h982y98299ty892hyiueyh982ye98y8ughui2"
+import  dotenv from "dotenv"
+dotenv.config()
+const JWT_SECRET_RESET_PASSWORD=process.env.JWT_SECRET_RESET_PASSWORD!
 
 
 class RedefinePasswordUserController {
