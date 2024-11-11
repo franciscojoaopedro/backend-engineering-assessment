@@ -1,0 +1,23 @@
+{
+  "name": "backend-fastify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx  ./src/infra/http/www/www.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "fastify": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "tsx": "^4.19.2"
+  }
+}
