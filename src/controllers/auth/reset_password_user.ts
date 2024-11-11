@@ -1,17 +1,15 @@
 import {FastifyReply, FastifyRequest} from "fastify";
 import usePrisma from "../../shared/helpers/usePrisma";
 import useJwt from "../../shared/helpers/useJwt";
-import Bcrypt from "../../shared/utils/useBycriptJs";
 
 
-class AuthCompanyController {
+class ResetPasswordUserController {
 
     async execute(request:FastifyRequest,reply:FastifyReply){
-        const {email, password} = request.body as {email:string,password:string};
+        const {email} = request.body as {email:string};
         try{
             const {verifyUserLogin}=usePrisma()
-            const {generateTokenUserLogin}=useJwt()
-            const {verifyPassword}=Bcrypt()
+            const {generateTokenResetPassword}=useJwt()
             const user=await verifyUserLogin(email)
             if(!user){
                 return   reply.code(401).send({
@@ -19,29 +17,18 @@ class AuthCompanyController {
                     message:"user not existed"
                 })
             }
-            if(!await verifyPassword(password,user.password)){
-                return   reply.code(401).send({
-                    success:false,
-                    message:"password incorrect"
-                })
-            }
-
-
-
             const data={
                 id:user.id,
-                email:user.email,
-                gender:user.gender,
-                age:user.age,
-                phone:user.phone,
-                country:user.country
+                email:user.email
             }
+            const token=await generateTokenResetPassword(data)
+            const resetLink=`http://localhost:5000/resetPassword?token=${token}`;
 
-            const token=await generateTokenUserLogin(data)
+
             return   reply.code(200).send({
                 success:true,
-                message:"login success",
-                token:token
+                message:"link  reset password sent successfully",
+                token:resetLink
             })
 
         }
@@ -57,5 +44,5 @@ class AuthCompanyController {
     }
 }
 
-const auth_company_controller= new AuthCompanyController()
-export  default  auth_company_controller
+const reset_password_user_controller= new ResetPasswordUserController()
+export  default  reset_password_user_controller
