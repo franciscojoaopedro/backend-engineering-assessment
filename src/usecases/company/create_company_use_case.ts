@@ -12,6 +12,7 @@ export  default  class CreateCompanyUseCase implements  Usecase<CreateCompanyDto
         return CreateCompanyUseCase.create(gateway);
     }
 
+    // @ts-ignore
     async execute(input: CreateCompanyDto): Promise<CompanyDto> {
         const company=CompanyEntity.with(input)
         return  await this.gateway.createCompany(company);

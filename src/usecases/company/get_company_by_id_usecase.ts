@@ -15,6 +15,7 @@ export  default  class  GetCompanyByIdUseCase implements  Usecase<ICompany, Comp
     public  static  with(gateway:CompanyGateway) {
         return   GetCompanyByIdUseCase.create(gateway)
     }
+    // @ts-ignore
    async execute(input: ICompany): Promise<CompanyDto | null> {
      return await  this.gateway.getCompanyById(input.id);
     }

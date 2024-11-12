@@ -1,6 +1,7 @@
 import {FastifyReply, FastifyRequest} from "fastify";
 import usePrisma from "../../shared/helpers/usePrisma";
 import useJwt from "../../shared/helpers/useJwt";
+import {transport} from "../../services/email/config";
 
 
 class ResetPasswordUserController {
@@ -22,8 +23,19 @@ class ResetPasswordUserController {
                 email:user.email
             }
             const token=await generateTokenResetPassword(data)
-            const resetLink=`http://localhost:5000/resetPassword?token=${token}`;
+            const resetLink=`http://localhost:5000/api/auth/user/redefine-password/${token}`;
 
+            const sendMail= await  transport.sendMail({
+                from:"myriam.huel@ethereal.emai",
+                to:email,
+                subject:"Reset Password",
+                html:`<div>   
+                                <h2> link pra resetar senha ${ resetLink}</h2>
+                                <p>token : ${token}  </p>
+                                </div>
+                        `
+            })
+            console.log("Message sent: %s", sendMail.envelope);
 
             return   reply.code(200).send({
                 success:true,
