@@ -14,7 +14,7 @@ export class GetUserController {
             return   reply.code(200)
                 .send({
                     success:true,
-                    message:"user",
+                    message:"user found",
                     data:user
                 })
 

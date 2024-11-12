@@ -1,7 +1,7 @@
 import {FastifyReply, FastifyRequest} from "fastify";
-import usePrisma from "../../shared/helpers/usePrisma";
-import useJwt from "../../shared/helpers/useJwt";
-import Bcrypt from "../../shared/utils/useBycriptJs";
+import usePrisma from "../../../shared/helpers/usePrisma";
+import useJwt from "../../../shared/helpers/useJwt";
+import Bcrypt from "../../../shared/utils/useBycriptJs";
 
 
 class AuthCompanyController {
@@ -10,13 +10,13 @@ class AuthCompanyController {
         const {email, password} = request.body as {email:string,password:string};
         try{
             const {verifyCompanyLogin}=usePrisma()
-            const {generateTokenUserLogin}=useJwt()
+            const {generateTokenCompanyLogin}=useJwt()
             const {verifyPassword}=Bcrypt()
             const company=await verifyCompanyLogin(email)
             if(!company){
                 return   reply.code(401).send({
                     success:false,
-                    message:"user not existed"
+                    message:"company not existed"
                 })
             }
             if(!await verifyPassword(password,company.password)){
@@ -26,18 +26,14 @@ class AuthCompanyController {
                 })
             }
 
-
-
             const data={
-                id:user.id,
-                email:user.email,
-                gender:user.gender,
-                age:user.age,
-                phone:user.phone,
-                country:user.country
+                id:company.id,
+                email:company.email,
+                name:company.name,
+
             }
 
-            const token=await generateTokenUserLogin(data)
+            const token=await generateTokenCompanyLogin(data)
             return   reply.code(200).send({
                 success:true,
                 message:"login success",

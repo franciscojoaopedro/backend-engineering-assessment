@@ -4,18 +4,18 @@ import {CreateUserDto} from "../../types/entities/user.types";
 import Bcrypt from "../../shared/utils/useBycriptJs";
 import usePrisma from "../../shared/helpers/usePrisma";
 import {ErrorResponse} from "../../shared/utils/errorResponseController";
+import {CreateCompanyDto} from "../../types/entities/company.types";
 
 class Create_company_controller {
     async execute(request:FastifyRequest,reply:FastifyReply):Promise<FastifyReply> {
         const {
-            gender,
-            name,
-            password,
             email,
-            age,
-            country,
-            phone
-        }=request.body as CreateUserDto;
+            password,
+            name,
+            website,
+            location,
+            description
+        }=request.body as CreateCompanyDto;
 
 
         try{
@@ -30,12 +30,11 @@ class Create_company_controller {
             }
             const user=await create_user_service.execute({
             email,
-            name,
             password: await  hashPassword(password),
-            gender,
-            age,
-            country,
-            phone
+                name,
+                website,
+                location,
+                description
         })
         return  reply.code(200)
             .send({

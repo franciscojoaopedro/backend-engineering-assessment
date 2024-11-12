@@ -7,21 +7,15 @@ import {ErrorResponse} from "../../shared/utils/errorResponseController";
 
 class Create_user_controller {
     async execute(request:FastifyRequest,reply:FastifyReply):Promise<FastifyReply> {
-        const {
-            gender,
-            name,
-            password,
-            email,
-            age,
-            country,
-            phone
-        }=request.body as CreateUserDto;
+        const {gender, name, password, email, age, country, phone}=request.body as CreateUserDto;
 
 
         try{
 
             const {verifyUserExisted}=usePrisma()
             const {hashPassword}=Bcrypt()
+
+
             if(await verifyUserExisted(email)){
                 return reply.code(200).send({
                     success:false,

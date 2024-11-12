@@ -4,21 +4,25 @@ import prisma from "../../infrastructure/db/prisma";
 import usePrisma from "../../shared/helpers/usePrisma";
 
 
- class UserController {
-
-    async addJobFavorete(request:FastifyRequest, reply:FastifyReply): Promise<FastifyReply> {
-
+ class AddFavoriteController {
+    async execute(request:FastifyRequest, reply:FastifyReply): Promise<FastifyReply> {
         try{
             const {idUser,idJob}= request.body  as {idUser:string,idJob:string};
-            const {verifyUserExisted}=usePrisma()
-            if(!verifyUserExisted(idUser)){
-                reply.code(401)
+            const {verifyUserExisted,verifyJobExisted}=usePrisma()
+            if(! await verifyUserExisted(idUser)){
+               return  reply.code(401)
                     .send({
                         success:false,
                         message:"user not existed"
                     })
             }
-
+            if(! await verifyJobExisted(idJob)){
+             return    reply.code(401)
+                    .send({
+                        success:false,
+                        message:"job not existed"
+                    })
+            }
             const favorites =await  prisma.jobFavorite.create({
                 data:{
                     user:{
@@ -33,14 +37,13 @@ import usePrisma from "../../shared/helpers/usePrisma";
                     }
                 }
             })
-        return  reply.status(200)
+             return  reply.status(200)
             .send({
                 success:true,
                 message:"job added in favorite",
+                data:favorites
             })
         }
-
-
 
         catch (error) {
             return ErrorResponse(error,reply)
@@ -48,5 +51,5 @@ import usePrisma from "../../shared/helpers/usePrisma";
     }
 }
 
-const user_controller=new UserController()
-export  default  user_controller
+const add_job_favorite_controller=new AddFavoriteController()
+export  default( add_job_favorite_controller)

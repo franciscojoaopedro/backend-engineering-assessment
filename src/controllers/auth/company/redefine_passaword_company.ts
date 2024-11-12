@@ -8,7 +8,8 @@ const JWT_SECRET_RESET_PASSWORD=process.env.JWT_SECRET_RESET_PASSWORD!
 class RedefinePasswordCompanyController {
 
     async execute(request:FastifyRequest,reply:FastifyReply){
-        const {newPassword,token} = request.body as {token:string,newPassword:string};
+        const {token}=request.params as {token:string};
+        const {newPassword} = request.body as {newPassword:string};
         try{
             const decoded=jwt.verify(token,JWT_SECRET_RESET_PASSWORD) as {id:string,email:string}
             const {hashPassword}=Bcrypt()

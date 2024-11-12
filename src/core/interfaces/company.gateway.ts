@@ -1,9 +1,9 @@
-
+import CompanyEntity from "../entities/company.enitity";
+import {CompanyDto} from "../../types/entities/company.types";
 
 
 export interface CompanyGateway{
-    createUser(company:string):Promise<void>;
-    getUserById(id:string):Promise<void>;
-    getUserByEmail(id:string):Promise<void>;
-    getAllUsers():Promise<void>;
+    createCompany(company:CompanyEntity):Promise<CompanyDto>;
+    getCompanyById(id:string):Promise<CompanyDto | null>;
+    getAllCompany():Promise<CompanyDto[]|[]>;
 }

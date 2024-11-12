@@ -1,19 +1,19 @@
 import Usecase from "../use_case";
-import {UserGateway} from "../../core/interfaces/user.gateway";
-import {CreateUserDto, UserDto} from "../../types/entities/user.types";
-import UserEntity from "../../core/entities/user.entity";
+import {CompanyGateway} from "../../core/interfaces/company.gateway";
+import {CompanyDto, CreateCompanyDto} from "../../types/entities/company.types";
+import CompanyEntity from "../../core/entities/company.enitity";
 
+export  default  class CreateCompanyUseCase implements  Usecase< CreateCompanyDto, CompanyDto>{
+    private constructor(private readonly  gateway: CompanyGateway) {}
+    public  static  create(gateway: CompanyGateway) {
+        return new CreateCompanyUseCase(gateway);
+    }
+    public  static  with(gateway: CompanyGateway) {
+        return CreateCompanyUseCase.create(gateway);
+    }
 
-export  default  class CreateUserUseCase implements  Usecase<CreateUserDto, UserDto>{
-    private constructor(private readonly  gateway:UserGateway) {}
-    public  static  create(gateway:UserGateway) {
-        return new CreateUserUseCase(gateway);
-    }
-    public  static  with(gateway:UserGateway) {
-        return CreateUserUseCase.create(gateway);
-    }
-     async execute(input: CreateUserDto): Promise<UserDto | null> {
-       const user=UserEntity.with(input)
-         return  await this.gateway.createUser(user);
+    async execute(input: CreateCompanyDto): Promise<CompanyDto> {
+        const company=CompanyEntity.with(input)
+        return  await this.gateway.createCompany(company);
     }
 }
