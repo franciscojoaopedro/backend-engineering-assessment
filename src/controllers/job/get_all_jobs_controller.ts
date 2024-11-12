@@ -35,7 +35,7 @@ class GetAllJobController {
             if (companyName) {
                 where.company = { name: { contains: companyName, mode: 'insensitive' } };
             }
-            
+
 
             const jobs = await prisma.job.findMany({
                 where,

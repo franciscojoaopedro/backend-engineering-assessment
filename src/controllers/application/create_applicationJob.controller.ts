@@ -9,7 +9,7 @@ class  CreateApplicationJobController {
 
     async  execute(request:FastifyRequest,reply:FastifyReply):Promise<FastifyReply> {
 
-        const {idUser,idJob}=request.params as {idUser:string,idJob:string}
+        const {idUser,idJob}=request.body as {idUser:string,idJob:string}
 
         try{
 

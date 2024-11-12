@@ -6,6 +6,7 @@ import authRoutes from "./auth/auth_routes";
 import favoriteRoutes from "./favorite/favorite";
 import companyRoutes from "./company/company";
 import jobRoutes from "./job/job_routes";
+import applicationRoutes from "./application/application";
 
 
 const routes=(routes:FastifyInstance)=>{
@@ -28,7 +29,7 @@ const routes=(routes:FastifyInstance)=>{
         logLevel:"trace",
     })
 
-    routes.register(favoriteRoutes,{
+    routes.register(applicationRoutes,{
         prefix:"/application",
         logLevel:"trace",
     })
