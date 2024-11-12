@@ -2,11 +2,19 @@ import {PrismaClient} from "@prisma/client"
 import {CompanyGateway} from "../../core/interfaces/company.gateway";
 import CompanyEntity from "../../core/entities/company.enitity";
 import {CompanyDto} from "../../types/entities/company.types";
+import prisma from "../db/prisma";
 
 
 class CompanyRepositoryPrisma  implements  CompanyGateway{
     private constructor(private readonly  prisma:PrismaClient) {}
 
+    public  static  create(prisma:PrismaClient) {
+        return new   CompanyRepositoryPrisma (prisma)
+    }
+
+    public  static  with(prisma:PrismaClient){
+        return  CompanyRepositoryPrisma .create(prisma)
+    }
    async createCompany(company: CompanyEntity): Promise<CompanyDto> {
       const data={
           name:company.getCompany.name,
@@ -73,3 +81,8 @@ class CompanyRepositoryPrisma  implements  CompanyGateway{
     }
 
 }
+
+
+
+const companyRepositoryPrisma= CompanyRepositoryPrisma.with(prisma)
+export  default companyRepositoryPrisma

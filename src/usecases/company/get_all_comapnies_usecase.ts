@@ -1,16 +1,17 @@
-import {UserGateway} from "../../core/interfaces/user.gateway";
-import {UserDto} from "../../types/entities/user.types";
-export  default  class  GetAllUsersUseCase{
-    private constructor(private  readonly gateway:UserGateway) {}
 
-    public  static create(gateway:UserGateway){
-        return new  GetAllUsersUseCase(gateway)
+import {CompanyGateway} from "../../core/interfaces/company.gateway";
+import {CompanyDto} from "../../types/entities/company.types";
+export  default  class  GetAllCompaniesUseCase{
+    private constructor(private  readonly gateway:CompanyGateway) {}
+
+    public  static create(gateway:CompanyGateway){
+        return new  GetAllCompaniesUseCase(gateway)
     }
-    public  static  with(gateway:UserGateway) {
-        return   GetAllUsersUseCase.create(gateway)
+    public  static  with(gateway:CompanyGateway) {
+        return   GetAllCompaniesUseCase.create(gateway)
     }
 
-    async  execute(): Promise<UserDto[] |[]> {
-        return await  this.gateway.getAllUsers();
+    async  execute(): Promise<CompanyDto[] |[]> {
+        return await  this.gateway.getAllCompany();
     }
 }

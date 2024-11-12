@@ -29,5 +29,5 @@ class GetJobController {
     }
 }
 
-const get_job_favorite_controller=new GetJobController()
-export  default( get_job_favorite_controller)
+const get_job_controller=new GetJobController()
+export  default( get_job_controller)

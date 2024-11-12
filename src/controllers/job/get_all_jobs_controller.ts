@@ -27,5 +27,5 @@ class GetAllJobController {
     }
 }
 
-const get_all_job_favorite_controller=new GetAllJobController()
-export  default( get_all_job_favorite_controller)
+const get_all_job_controller=new GetAllJobController()
+export  default( get_all_job_controller)

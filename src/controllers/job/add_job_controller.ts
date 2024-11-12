@@ -66,5 +66,5 @@ class AddJobController {
     }
 }
 
-const add_job_favorite_controller=new AddJobController()
-export  default( add_job_favorite_controller)
+const add_job_controller=new AddJobController()
+export  default( add_job_controller)

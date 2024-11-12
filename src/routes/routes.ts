@@ -4,6 +4,8 @@ import {
 import userRoutes from "./user/user.routes";
 import authRoutes from "./auth/auth_routes";
 import favoriteRoutes from "./favorite/favorite";
+import companyRoutes from "./company/company";
+import jobRoutes from "./job/job_routes";
 
 
 const routes=(routes:FastifyInstance)=>{
@@ -21,7 +23,7 @@ const routes=(routes:FastifyInstance)=>{
         prefix:"/favorite",
         logLevel:"trace",
     })
-    routes.register(favoriteRoutes,{
+    routes.register(jobRoutes,{
         prefix:"/job",
         logLevel:"trace",
     })
@@ -31,7 +33,7 @@ const routes=(routes:FastifyInstance)=>{
         logLevel:"trace",
     })
 
-    routes.register(favoriteRoutes,{
+    routes.register(companyRoutes,{
         prefix:"/company",
         logLevel:"trace",
     })

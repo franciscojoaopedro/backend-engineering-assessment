@@ -2,20 +2,21 @@ import {FastifyReply, FastifyRequest} from "fastify";
 import {ErrorResponse} from "../../shared/utils/errorResponseController";
 
 import get_user_service from "../../core/services/user/get_user_service";
+import get_company_service from "../../core/services/company/get_company_service";
 
 
 export class GetUserController {
     async execute(request:FastifyRequest,reply:FastifyReply): Promise<FastifyReply> {
-        const {id}=request.params as {id:string};
+        const {idCompany}=request.params as {idCompany:string};
         try{
-            const user= await  get_user_service.execute(id)
+            const company= await   get_company_service.execute(idCompany)
 
-            if (user){
+            if (company){
             return   reply.code(200)
                 .send({
                     success:true,
-                    message:"user",
-                    data:user
+                    message:"company",
+                    data:company
                 })
 
             }
@@ -23,7 +24,7 @@ export class GetUserController {
             return   reply.code(200)
                 .send({
                     success:true,
-                    message:"user not found",
+                    message:"company not found",
                     data:{}
                 })
         }

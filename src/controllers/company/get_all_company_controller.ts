@@ -1,18 +1,19 @@
 import {FastifyReply, FastifyRequest} from "fastify";
 import {ErrorResponse} from "../../shared/utils/errorResponseController";
 import get_all_users_service from "../../core/services/user/get_all_users_service";
+import get_all_company_service from "../../core/services/company/get_all_company_service";
 
 
 export class GetAllUserController {
     async execute(request:FastifyRequest,reply:FastifyReply): Promise<FastifyReply> {
         try{
-            const users=await get_all_users_service.execute()
+            const companies=await get_all_company_service .execute()
 
           return   reply.code(200)
                 .send({
                     success:true,
-                    message:"all users",
-                    data:users
+                    message:"all companies",
+                    data:companies
                 })
         }
         catch(err){

@@ -1,20 +1,21 @@
-import {UserGateway} from "../../core/interfaces/user.gateway";
-import Usecase from "../use_case";
-import {UserDto} from "../../types/entities/user.types";
 
-interface IUser {
+import Usecase from "../use_case";
+import {CompanyGateway} from "../../core/interfaces/company.gateway";
+import {CompanyDto} from "../../types/entities/company.types";
+
+interface ICompany {
     id: string
 }
 
-export  default  class  GetUserByIdUseCase implements  Usecase<IUser, UserDto>{
-    private constructor(private  readonly gateway:UserGateway) {}
-    public  static create(gateway:UserGateway){
-        return new  GetUserByIdUseCase(gateway)
+export  default  class  GetCompanyByIdUseCase implements  Usecase<ICompany, CompanyDto>{
+    private constructor(private  readonly gateway:CompanyGateway) {}
+    public  static create(gateway:CompanyGateway){
+        return new  GetCompanyByIdUseCase(gateway)
     }
-    public  static  with(gateway:UserGateway) {
-        return   GetUserByIdUseCase.create(gateway)
+    public  static  with(gateway:CompanyGateway) {
+        return   GetCompanyByIdUseCase.create(gateway)
     }
-   async execute(input: IUser): Promise<UserDto | null> {
-     return await  this.gateway.getUserById(input.id);
+   async execute(input: ICompany): Promise<CompanyDto | null> {
+     return await  this.gateway.getCompanyById(input.id);
     }
 }

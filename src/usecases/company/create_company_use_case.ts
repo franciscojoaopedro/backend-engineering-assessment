@@ -3,7 +3,7 @@ import {CompanyGateway} from "../../core/interfaces/company.gateway";
 import {CompanyDto, CreateCompanyDto} from "../../types/entities/company.types";
 import CompanyEntity from "../../core/entities/company.enitity";
 
-export  default  class CreateCompanyUseCase implements  Usecase< CreateCompanyDto, CompanyDto>{
+export  default  class CreateCompanyUseCase implements  Usecase<CreateCompanyDto, CompanyDto>{
     private constructor(private readonly  gateway: CompanyGateway) {}
     public  static  create(gateway: CompanyGateway) {
         return new CreateCompanyUseCase(gateway);
