@@ -9,17 +9,17 @@ class AuthCompanyController {
     async execute(request:FastifyRequest,reply:FastifyReply){
         const {email, password} = request.body as {email:string,password:string};
         try{
-            const {verifyUserLogin}=usePrisma()
+            const {verifyCompanyLogin}=usePrisma()
             const {generateTokenUserLogin}=useJwt()
             const {verifyPassword}=Bcrypt()
-            const user=await verifyUserLogin(email)
-            if(!user){
+            const company=await verifyCompanyLogin(email)
+            if(!company){
                 return   reply.code(401).send({
                     success:false,
                     message:"user not existed"
                 })
             }
-            if(!await verifyPassword(password,user.password)){
+            if(!await verifyPassword(password,company.password)){
                 return   reply.code(401).send({
                     success:false,
                     message:"password incorrect"

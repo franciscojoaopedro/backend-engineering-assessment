@@ -4,13 +4,12 @@ import prisma from "../../infrastructure/db/prisma";
 import usePrisma from "../../shared/helpers/usePrisma";
 
 
-export  default  class UserController {
+ class UserController {
 
     async addJobFavorete(request:FastifyRequest, reply:FastifyReply): Promise<FastifyReply> {
 
         try{
             const {idUser,idJob}= request.body  as {idUser:string,idJob:string};
-
             const {verifyUserExisted}=usePrisma()
             if(!verifyUserExisted(idUser)){
                 reply.code(401)
@@ -48,3 +47,6 @@ export  default  class UserController {
         }
     }
 }
+
+const user_controller=new UserController()
+export  default  user_controller
